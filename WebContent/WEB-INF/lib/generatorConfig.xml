@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE generatorConfiguration  
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"  
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+	<!-- 引用的jdbc的类路径 -->
+	<classPathEntry location="mysql-connector-java-5.1.30.jar" />
+
+	<context id="DB2Tables" targetRuntime="MyBatis3">
+		<!-- 用来除去时间信息的，这在配合类似subversion的代码管理工具时使用很有效，因为可以减少没有必要的注释迁入 -->
+		<commentGenerator>
+			<property name="suppressDate" value="true" />
+		</commentGenerator>
+
+		<!-- 指定的jdbc的连接信息 -->
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://localhost:3306/test" userId="root"
+			password="123456">
+		</jdbcConnection>
+
+		<!-- 类型转换的信息，这里并没有用到 -->
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+
+		<!-- 模型的生成信息，这里将指定这些Java model类的生成路径 -->
+		<!-- <javaModelGenerator targetPackage="test.model"
+			targetProject="../src/main/java"> -->
+		<javaModelGenerator targetPackage="com.mybatis.generator.user.model"
+			targetProject="../../../src/main/java">
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+
+		<!-- mybatis 的sqlMapper XML文件的生成信息，包括生成路径等 -->
+		<!-- <sqlMapGenerator targetPackage="test.dao"
+			targetProject="../src/main/java"> -->
+		<sqlMapGenerator targetPackage="com.mybatis.generator.user.dao"
+			targetProject="../../../src/main/java">
+			<property name="enableSubPackages" value="true" />
+		</sqlMapGenerator>
+
+		<!-- 应用接口的生成信息 -->
+		<javaClientGenerator type="XMLMAPPER"
+			targetPackage="com.mybatis.generator.user.dao" targetProject="../../../src/main/java">
+			<!-- targetPackage="test.dao" targetProject="../src/main/java"> -->
+			<property name="enableSubPackages" value="true" />
+		</javaClientGenerator>
+
+		<!-- 用户指定的被生成相关信息的表，它必须在指定的jdbc连接中已经被建立 -->
+		<!-- <table tableName="pet" domainObjectName="Pet"> -->
+		<table tableName="user" domainObjectName="User"/>
+	</context>
+</generatorConfiguration>  
